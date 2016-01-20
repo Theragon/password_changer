@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import render_template
 
 import subprocess as sub
 #from subprocess import Popen, PIPE
@@ -8,23 +9,13 @@ import sys
 app = Flask(__name__)
 
 test_user = 'tdurden'
-test_pass = 'ScaryM0nster'
+test_pass = 'DoubleRa1nbow'
 ad_url = sys.argv[1]
-
-
-html_form = \
-	('<form action="change_password", method="post">'
-		'Username: <input type="text" name="username"><br>'
-		'Current password: <input type="password" name="oldpass"><br>'
-		'New password: <input type="password" name="newpass"><br>'
-		'Confirm password: <input type="password" name="conf_pass"><br>'
-		'<input type="submit" value="Submit">'
-		'</form>')
 
 
 @app.route('/')
 def index():
-	return html_form
+	return render_template('index.html')
 
 
 @app.route('/change_password', methods=['POST'])
