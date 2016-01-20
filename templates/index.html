@@ -1,7 +1,15 @@
-<form action="change_password", method="post">
+<!--<form action="change_password", method="post">
 	Username: <input type="text" name="username"><br>
 	Current password: <input type="password" name="oldpass"><br>
 	New password: <input type="password" name="newpass"><br>
 	Confirm password: <input type="password" name="conf_pass"><br>
+	<input type="submit" value="Submit">
+</form>-->
+
+<form method="post" action="change_password">
+	{{ form.username.label }} {{ form.username(size=20) }}<br>
+	{{ form.oldpass.label }} {{ form.oldpass }}<br>
+	{{ form.newpass.label }} {{ form.newpass }}<br>
+	{{ form.confpass.label }} {{ form.confpass }}<br>
 	<input type="submit" value="Submit">
 </form>
