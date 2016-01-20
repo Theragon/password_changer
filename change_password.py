@@ -44,7 +44,7 @@ def change_password():
 
 		#if newpass == confpass:
 		try:
-			result = sub.check_output(["/home/lleifsson/tmp/change_pass.sh", oldpass, newpass, username, ad_url])
+			result = sub.check_output(["./change_pass.sh", oldpass, newpass, username, ad_url])
 			#p = Popen(["/home/lleifsson/tmp/change_pass.sh", oldpass, newpass, username], stdin=PIPE, stdout=PIPE, stderr=PIPE)
 			#output, err = p.communicate(b"input data that is passed to subprocess' stdin")
 			#result = p.returncode
