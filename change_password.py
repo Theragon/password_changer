@@ -9,7 +9,7 @@ import subprocess as sub
 #from subprocess import Popen, PIPE
 import sys
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 test_user = 'tdurden'
 test_pass = 'DoubleRa1nbow'
