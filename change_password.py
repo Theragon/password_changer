@@ -2,6 +2,9 @@ from flask import Flask
 from flask import request
 from flask import render_template
 from flask import jsonify
+from flask import flash
+from flask import redirect
+from flask import url_for
 
 from wtforms import Form, TextField, PasswordField, validators
 
@@ -10,9 +13,10 @@ import subprocess as sub
 import sys
 
 app = Flask(__name__, static_url_path='/static')
+app.secret_key = 'cocacolazero'
 
 test_user = 'tdurden'
-test_pass = 'NewPassword1'
+test_pass = 'F1ghtClub'
 ad_url = sys.argv[1]
 
 
@@ -26,16 +30,13 @@ class RegistrationForm(Form):
 	confpass = PasswordField('Confirm password')
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
 	form = RegistrationForm(request.form)
-	return render_template('index.html', form=form)
+	if request.method == 'GET':
+		return render_template('index.html', form=form)
 
-
-@app.route('/change_password', methods=['POST'])
-def change_password():
-	form = RegistrationForm(request.form)
-	if form.validate():
+	if request.method == 'POST' and form.validate():
 		print('form validated')
 		username = request.form['username']
 		newpass = request.form['newpass']
@@ -46,10 +47,13 @@ def change_password():
 		out, err = p.communicate()
 		if err:
 			print(err)
-			return err
+			#return err
+			flash(err)
 		else:
 			msg = out.split('\n')[-2]
-			return msg
+			#return msg
+			flash(msg)
+		return redirect(url_for('index'))
 
 	return jsonify(form.errors)
 
