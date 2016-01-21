@@ -22,18 +22,18 @@
 			  </div>
 			</h2>
 		<div class="ui divider"></div>
-		<form class="ui fluid form" action="change_password" , method="post">
+		<form class="ui fluid form" action="change_password" autocomplete="off" method="post">
 			<div class="ui labeled small input fluid field">
-				{{ form.username.label(class='ui label') }} {{ form.username(size=20) }}
+				{{ form.username.label(class='ui label') }} {{ form.username(size=20, autocomplete='off') }}
 			</div>
 			<div class="ui labeled small input fluid field">
-				{{ form.oldpass.label(class='ui label') }} {{ form.oldpass }}
+				{{ form.oldpass.label(class='ui label') }} {{ form.oldpass(autocomplete='off') }}
 			</div>
 			<div class="ui labeled small input fluid field">
-				{{ form.newpass.label(class='ui label') }} {{ form.newpass }}
+				{{ form.newpass.label(class='ui label') }} {{ form.newpass(autocomplete='off') }}
 			</div>
 			<div class="ui labeled small input fluid field">
-				{{ form.confpass.label(class='ui label') }} {{ form.confpass }}
+				{{ form.confpass.label(class='ui label') }} {{ form.confpass(autocomplete='off') }}
 			</div>
 			<input type="submit" value="Update password" class="ui right floated orange button">
 
