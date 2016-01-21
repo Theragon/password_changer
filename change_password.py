@@ -12,7 +12,7 @@ import sys
 app = Flask(__name__)
 
 test_user = 'tdurden'
-test_pass = 'DoubleRa1nbow'
+test_pass = 'NewPassword1'
 ad_url = sys.argv[1]
 
 
@@ -42,24 +42,14 @@ def change_password():
 		oldpass = request.form['oldpass']
 		#confpass = request.form['confpass']
 
-		#if newpass == confpass:
-		try:
-			result = sub.check_output(["./change_pass.sh", oldpass, newpass, username, ad_url])
-			#p = Popen(["/home/lleifsson/tmp/change_pass.sh", oldpass, newpass, username], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-			#output, err = p.communicate(b"input data that is passed to subprocess' stdin")
-			#result = p.returncode
-			return 'Password successfully changed'
-		except sub.CalledProcessError as e:
-			#print('e: ' + str(e))
-			return 'Failed to change password'
-		except:
-			print('failure')
-			#print('result: ' + result)
-			return 'Failure'
-		if result == 0:
-			return 'OK'
+		p = sub.Popen(['./change_pass.sh', oldpass, newpass, username, ad_url], stdout=sub.PIPE, stderr=sub.PIPE)
+		out, err = p.communicate()
+		if err:
+			print(err)
+			return err
 		else:
-			return result
+			msg = out.split('\n')[-2]
+			return msg
 
 	return jsonify(form.errors)
 
