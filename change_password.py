@@ -1,15 +1,15 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from flask import jsonify
+#from flask import jsonify
 from flask import flash
 from flask import redirect
 from flask import url_for
 
 from wtforms import Form, TextField, PasswordField, validators
 
-import subprocess as sub
-#from subprocess import Popen, PIPE
+#import subprocess as sub
+from subprocess import Popen, PIPE
 import sys
 
 app = Flask(__name__, static_url_path='/static')
@@ -43,19 +43,19 @@ def index():
 		oldpass = request.form['oldpass']
 		#confpass = request.form['confpass']
 
-		p = sub.Popen(['./change_pass.sh', oldpass, newpass, username, ad_url], stdout=sub.PIPE, stderr=sub.PIPE)
+		p = Popen(['./change_pass.sh', oldpass, newpass, username, ad_url], stdout=PIPE, stderr=PIPE)
 		out, err = p.communicate()
 		if err:
-			print(err)
-			#return err
 			flash(err)
+			return redirect(url_for('index', success=False))
 		else:
 			msg = out.split('\n')[-2]
-			#return msg
 			flash(msg)
-		return redirect(url_for('index'))
+			return redirect(url_for('index', success=True))
 
-	return jsonify(form.errors)
+	for key, value in form.errors.iteritems():
+		flash(value[0])
+	return redirect(url_for('index', success=False))
 
 
 if __name__ == '__main__':
