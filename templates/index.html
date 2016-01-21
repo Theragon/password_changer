@@ -1,26 +1,43 @@
 <html>
-	<head>
-		<!-- Standard Meta -->
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-		<!-- Site Properties -->
-		<title>Update Password</title>
-		<link rel="stylesheet" type="text/css" href="semantic.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<script src="semantic.min.js"></script>
-	</head>
-	<body>
-		<div class="ui text container">
-			<div class="ui segments">
-				<form method="post" action="change_password">
-					{{ form.username.label }} {{ form.username(size=20) }}<br>
-					{{ form.oldpass.label }} {{ form.oldpass }}<br>
-					{{ form.newpass.label }} {{ form.newpass }}<br>
-					{{ form.confpass.label }} {{ form.confpass }}<br>
-					<input type="submit" value="Submit">
-				</form>
-			</div>
-		</div>
 
-	</body>
+<head>
+	<!-- Standard Meta -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<!-- Site Properties -->
+	<title>Update Password</title>
+	<link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="/static/semantic.min.js"></script>
+</head>
+
+<body style="padding-top:20px;">
+	<div class="ui text container">
+		<h2 class="ui header grey">
+			  <i class="privacy icon orange"></i>
+			  <div class="content">
+				Update your password
+				<div class="sub header">Change the password to your active directory account</div>
+			  </div>
+			</h2>
+		<div class="ui divider"></div>
+		<form class="ui fluid form" action="change_password" , method="post">
+			<div class="ui labeled small input fluid field">
+				{{ form.username.label(class='ui label') }} {{ form.username(size=20) }}
+			</div>
+			<div class="ui labeled small input fluid field">
+				{{ form.oldpass.label(class='ui label') }} {{ form.oldpass }}
+			</div>
+			<div class="ui labeled small input fluid field">
+				{{ form.newpass.label(class='ui label') }} {{ form.newpass }}
+			</div>
+			<div class="ui labeled small input fluid field">
+				{{ form.confpass.label(class='ui label') }} {{ form.confpass }}
+			</div>
+			<input type="submit" value="Update password" class="ui right floated orange button">
+
+		</form>
+	</div>
+</body>
+
 </html>
