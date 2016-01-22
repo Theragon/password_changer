@@ -25,7 +25,7 @@
 			{% with messages = get_flashed_messages() %}
 				{% if messages %}
 					{% for message in messages %}
-						{% if success %}
+						{% if 'Password changed' in message %}
 							<div class="ui small success message">
 								<i class="close icon"></i>
 								<div class="header">Woohoo! It's a success...</div>

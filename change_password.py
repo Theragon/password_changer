@@ -16,7 +16,7 @@ app = Flask(__name__, static_url_path='/static')
 app.secret_key = 'cocacolazero'
 
 test_user = 'tdurden'
-test_pass = 'F1ghtClub'
+test_pass = '1OfficeBitch'
 ad_url = sys.argv[1]
 
 
@@ -47,15 +47,15 @@ def index():
 		out, err = p.communicate()
 		if err:
 			flash(err)
-			return redirect(url_for('index', success=False))
+			return redirect(url_for('index'))
 		else:
 			msg = out.split('\n')[-2]
 			flash(msg)
-			return redirect(url_for('index', success=True))
+			return redirect(url_for('index'))
 
 	for key, value in form.errors.iteritems():
 		flash(value[0])
-	return redirect(url_for('index', success=False))
+	return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
