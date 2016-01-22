@@ -20,31 +20,39 @@
 				Update your password
 				<div class="sub header">Change the password to your active directory account</div>
 			  </div>
-			</h2>
+		</h2>
 		<div class="ui divider"></div>
 			{% with messages = get_flashed_messages() %}
-		{% if messages %}
-			{% for message in messages %}
-				{% if success %}
-					<div class="ui success message">
-						<i class="close icon"></i>
-						<div class="header">Password change successful!</div>
-							<p>{{ message }}</p>
-					</div>
-				{% else %}
-					<div class="ui error message">
-						<i class="close icon"></i>
-						<div class="header">There were some errors with your submission</div>
-							<ul class="list">
-								<li>{{ message }}</li>
-								{# <li>You must include both a upper and lower case letters in your password.</li>
-								<li>You need to select your home country.</li> #}
-							</ul>
-						</div>
+				{% if messages %}
+					{% for message in messages %}
+						{% if success %}
+							<div class="ui small success message">
+								<i class="close icon"></i>
+								<div class="header">Woohoo! It's a success...</div>
+									<p>{{ message }}</p>
+							</div>
+						{% else %}
+							<div class="ui small error message">
+								<i class="close icon"></i>
+								<div class="header">Ooops! Something did not work out...</div>
+									<ul class="list">
+										<li>{{ message }}</li>
+										{# <li>You must include both a upper and lower case letters in your password.</li> #}
+									</ul>
+								</div>
+						{% endif %}
+					{% endfor %}
 				{% endif %}
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
+				<script>
+					$('.message .close')
+					  .on('click', function() {
+						$(this)
+						  .closest('.message').remove();
+						;
+					  })
+					;
+				</script>
+			{% endwith %}
 		<form class="ui fluid form" autocomplete="off" method="post">
 			<div class="ui labeled small input fluid field">
 				{{ form.username.label(class='ui label') }} {{ form.username(size=20, autocomplete='off') }}
