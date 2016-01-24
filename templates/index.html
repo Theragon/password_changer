@@ -8,8 +8,9 @@
 	<!-- Site Properties -->
 	<title>Update Password</title>
 	<link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="/static/jquery.min.js"></script>
 	<script src="/static/semantic.min.js"></script>
+	<script src="/static/passwordstrength.js"></script>
 </head>
 
 <body style="padding-top:20px;">
@@ -37,7 +38,6 @@
 								<div class="header">Ooops! Something did not work out...</div>
 									<ul class="list">
 										<li>{{ message }}</li>
-										{# <li>You must include both a upper and lower case letters in your password.</li> #}
 									</ul>
 								</div>
 						{% endif %}
@@ -67,9 +67,32 @@
 				{{ form.confpass.label(class='ui label') }} {{ form.confpass(autocomplete='off') }}
 			</div>
 			<input type="submit" value="Update password" class="ui right floated orange button">
-
 		</form>
 	</div>
-</body>
 
+	<br>
+	<br>
+	<div class="ui divider"></div>
+
+	<div class="ui text container">
+		<h3 class="ui header grey">Password Strength Meter</h3>
+		<p>
+			The strength meter tells you how many possible passwords there are based on the length and character types used.
+		</p>
+		<!--<p>
+			The password "1p" has 2 characters, one  a lowercase letter and one a number.  To brute force this password, there are 26 possible letters and 10 possible numbers which is (10 + 26) * (10 + 26) = 1,296 possibilities. Less than a second to crack!
+		</p>-->
+		<div id="passwordIndicator" >
+			<p>
+				<span id="possibilities" class="reset"></span>
+			</p>
+			<p>
+				Time to crack using <input type="text" id="nodes" value="2" size="5"/> core(s):
+			</p>
+			<p>
+				<span id="rates" class="reset"></span>
+			</p>
+		</div>
+	</div>
+</body>
 </html>
